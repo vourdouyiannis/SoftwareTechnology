@@ -1,0 +1,85 @@
+<!DOCTYPE HTML>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
+
+	<title>Student Registration Directory</title>
+</head>
+
+<body>
+
+<div class="container">
+
+	<h3>Student Registration Directory</h3>
+	<hr>
+	
+	<!-- Add a button -->
+	<a th:href="@{/showFormForAddStudentRegistrations}"
+		class="btn btn-primary btn-sm mb-3">
+		Add Student Registration
+	</a>
+	
+	
+	<table class="table table-bordered table-striped">
+		<thead class="thead-dark">
+			<tr>
+				<th>StudentID</th>
+				<th>Name</th>
+				<th>LastName</th>
+				<th>CourseRegistrationYear</th>
+				<th>StudentSemester</th>
+				<th>FinalExams</th>
+				<th>Project</th>
+				<th>FinalGrade</th>
+			</tr>
+		</thead>
+		
+		<tbody>
+			<tr th:each="tempstudentReg:${StudentRegistrations}">
+			
+				<td th:text="${tempstudentReg.studentId}" />	
+				<td th:text="${tempstudentReg.name}" />	
+				<td th:text="${tempstudentReg.lastName}" />
+				<td th:text="${tempstudentReg.courseRegYear}" />
+				<td th:text="${tempstudentReg.studentSemester}" />	
+				<td th:text="${tempstudentReg.finalExamGrade}" />
+				<td th:text="${tempstudentReg.projectGrade}" />	
+				<td th:text="${tempstudentReg.overallGrade}" />
+				
+				<td>
+					<!-- Add "update" button/link -->
+					<a th:href="@{/showFormForUpdateStudentRegistrations(registrationId=${tempstudentReg.registrationId})}"
+					   class="btn btn-info btn-sm">
+						Update Student Registration
+					</a>
+					
+					<!-- Add "delete" button/link -->					
+					<a th:href="@{/deleteStudentRegistrations(registrationId=${tempstudentReg.registrationId})}"
+					   class="btn btn-danger btn-sm"
+					   onclick="if (!(confirm('Are you sure you want to delete this student registration?'))) return false">
+						Delete Student Registration
+					</a>
+					
+					
+				</td>
+				
+			</tr>
+
+		</tbody>		
+	</table>
+	<hr>
+	<a th:href="@{/listCourses}">Back to Courses List</a>
+	
+</div>
+	
+</body>
+</html>
+
+
+
